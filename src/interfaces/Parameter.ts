@@ -1,4 +1,4 @@
-export default interface Parameter {
+export interface Parameter {
   name: string;
   value: number;
   unit: string;
