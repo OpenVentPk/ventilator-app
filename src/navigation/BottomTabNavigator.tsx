@@ -1,15 +1,24 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import * as React from 'react';
+import { Image, View, Text } from 'react-native';
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import ParametersScreen from '../screens/ParametersScreen';
 import AlarmsScreen from '../screens/AlarmsScreen';
-
+// import { Colors } from 'react-native/Libraries/NewAppScreen';
+import Colors from '../constants/Colors';
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'Main';
 
+function LogoTitle(props: any) {
+  return (
+    <Image
+      style={{ width: 50, height: 50 }}
+      source={require('../img/openventpk.png')}></Image>
+  );
+}
 export default function BottomTabNavigator({
   navigation,
   route,
@@ -18,36 +27,50 @@ export default function BottomTabNavigator({
   // Set the header title on the parent stack navigator depending on the
   // currently active tab. Learn more in the documentation:
   // https://reactnavigation.org/docs/en/screen-options-resolution.html
-  navigation.setOptions({ headerTitle: getHeaderTitle(route) });
+  navigation.setOptions({
+    headerTitle: getHeaderTitle(route),
+    // headerTitle: <LogoTitle></LogoTitle>,
+    headerTintColor: Colors.TextColor,
+    headerStyle: {
+      backgroundColor: Colors.GeneralBackGround,
+    },
+  });
   console.log(JSON.stringify(route));
   return (
-    <BottomTab.Navigator initialRouteName={INITIAL_ROUTE_NAME}>
+    <BottomTab.Navigator
+      initialRouteName={INITIAL_ROUTE_NAME}
+      tabBarOptions={{
+        activeBackgroundColor: Colors.GeneralBackGround,
+        inactiveBackgroundColor: Colors.GeneralBackGround,
+        activeTintColor: Colors.ActiveText,
+        inactiveTintColor: Colors.InactiveText,
+        showLabel: true,
+      }}
+      screenOptions={{}}>
       <BottomTab.Screen
         name="Main"
         component={HomeScreen}
-        params={route.params}
         options={{
-          title: 'Main',
           tabBarIcon: ({ focused }) => (
             <TabBarIcon focused={focused} name="md-code-working" />
           ),
         }}
       />
-      <BottomTab.Screen
+      {/* <BottomTab.Screen
         name="Parameters"
         component={ParametersScreen}
         options={{
-          title: 'Parameters',
+          // title: 'Parameters',
           tabBarIcon: ({ focused }) => (
             <TabBarIcon focused={focused} name="md-book" />
           ),
         }}
-      />
+      /> */}
       <BottomTab.Screen
         name="Alarms"
         component={AlarmsScreen}
         options={{
-          title: 'Alarms',
+          // title: 'Alarms',
           tabBarIcon: ({ focused }) => (
             <TabBarIcon focused={focused} name="md-alert" />
           ),
@@ -63,7 +86,7 @@ export default function BottomTabNavigator({
           ),
         }}
       />
-      <BottomTab.Screen
+      {/* <BottomTab.Screen
         name="LungMechanics"
         component={LinksScreen}
         options={{
@@ -82,7 +105,7 @@ export default function BottomTabNavigator({
             <TabBarIcon focused={focused} name="md-book" />
           ),
         }}
-      />
+      /> */}
     </BottomTab.Navigator>
   );
 }
