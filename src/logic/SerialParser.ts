@@ -1,5 +1,6 @@
 import Constants from '../constants/Constants';
 import Alarms from '../constants/Alarms';
+import VentilationModes from '../constants/VentilationModes';
 
 let dummydata1 = new Array(0);
 let dummydata2 = new Array(0);
@@ -89,13 +90,7 @@ export const processSerialData = (
       //console.log(Data);
       dummydata1 = [];
       dummydata2 = [];
-      var ControlMode = '';
-      if ((Data[29] & 0x08) > 0) {
-        ControlMode = 'AC-';
-      }
-      if ((Data[29] & 0x04) > 0) {
-        ControlMode = ControlMode + 'PCV';
-      } else ControlMode = ControlMode + 'VCV';
+      const ventilationMode = getVentilationMode(Data[29]);
 
       let currentAlarms = getAlarmValues(Data);
 
@@ -118,7 +113,7 @@ export const processSerialData = (
         flow: 23,
         flowrate: 23,
         PIP: Data[40] - 30,
-        mode: ControlMode,
+        mode: ventilationMode,
         graphPressure: GraphPressure,
         graphVolume: GraphVolume,
         graphFlow: GraphFlow,
@@ -182,4 +177,12 @@ function getAlarmValues(serialData: Array<number>): Array<string> {
 function getValueOfBit(valueToParse: number, bitIndex: number) {
   const bitIndexNumberForFindingValue = [1, 2, 4, 8, 16, 32, 64, 128];
   return valueToParse & bitIndexNumberForFindingValue[bitIndex];
+}
+
+function getVentilationMode(valueToParse: number): string {
+  // 0x1C is 00011100 so we find the values contain in bits 2-4
+  // we also want the index to retrieve the correct mode from our array
+  // so we shift the bits to the end to get the actual value
+  const ventilationModeIndex = (valueToParse & 0x1c) >> 2;
+  return VentilationModes[ventilationModeIndex];
 }
