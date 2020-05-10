@@ -59,6 +59,50 @@ export const processSerialData = (
         counterForGraphs = 0;
       }
 
+      const setPeep = packet[26] - 30;
+      const measuredPeep = getWordFloat(
+        packet[14],
+        packet[15],
+        40 / 65535,
+        -10,
+      );
+      const peepParameter: SetParameter = {
+        name: 'PEEP',
+        unit: 'cmH2O',
+        setValue: setPeep,
+        value: measuredPeep,
+        lowerLimit: 4,
+        upperLimit: 21,
+      };
+
+      const setInspiratoryPressure = packet[22] - 30;
+
+      const measuredPip = packet[40] - 30;
+      const pipParameter: SetParameter = {
+        name: 'PIP',
+        unit: 'cmH20',
+        setValue: setInspiratoryPressure,
+        value: measuredPip,
+        lowerLimit: setInspiratoryPressure + 5,
+        upperLimit: setInspiratoryPressure - 5,
+      };
+
+      const measuredPlateauPressure = getWordFloat(
+        packet[16],
+        packet[17],
+        90 / 65535,
+        -30,
+      );
+
+      const plateauPressureParameter: SetParameter = {
+        name: 'Plateau Pressure',
+        unit: 'cmH2O',
+        setValue: setInspiratoryPressure,
+        value: measuredPlateauPressure,
+        lowerLimit: setInspiratoryPressure - 1,
+        upperLimit: setInspiratoryPressure + 1,
+      };
+
       const ventilationMode = getVentilationMode(packet[29]);
 
       let currentAlarms = getAlarmValues(packet);
@@ -83,60 +127,6 @@ export const processSerialData = (
         value: measuredRespiratoryRate,
         lowerLimit: setRespiratoryRate - 1,
         upperLimit: setRespiratoryRate + 1,
-      };
-
-      const setPeep = packet[26] - 30;
-      const measuredPeep = getWordFloat(
-        packet[14],
-        packet[15],
-        40 / 65535,
-        -10,
-      );
-      const peepParameter: SetParameter = {
-        name: 'PEEP',
-        unit: 'cmH2O',
-        setValue: setPeep,
-        value: measuredPeep,
-        lowerLimit: 4,
-        upperLimit: 21,
-      };
-
-      const setPip = packet[26] - 30;
-      const measuredPip = packet[40] - 30;
-      let pipUpperLimit = null;
-      if (ventilationMode === 'VCV') {
-        pipUpperLimit = 35;
-      } else if (ventilationMode === 'PCV') {
-        pipUpperLimit = setPip + 2;
-      }
-      let pipLowerLimit = null;
-      if (ventilationMode === 'PCV') {
-        pipLowerLimit = setPip - 2;
-      }
-      const pipParameter: SetParameter = {
-        name: 'PIP',
-        unit: 'cmH20',
-        setValue: setPip,
-        value: measuredPip,
-        lowerLimit: pipLowerLimit,
-        upperLimit: pipUpperLimit,
-      };
-
-      const setPlateuPressure = packet[22] - 30;
-      const measuredPlateauPressure = getWordFloat(
-        packet[16],
-        packet[17],
-        90 / 65535,
-        -30,
-      );
-
-      const plateauPressureParameter: SetParameter = {
-        name: 'Plateau Pressure',
-        unit: 'cmH2O',
-        setValue: setPlateuPressure,
-        value: measuredPlateauPressure,
-        lowerLimit: setPlateuPressure - 1,
-        upperLimit: setPlateuPressure + 1,
       };
 
       const setMinuteVentilation = setTidalVolme * setRespiratoryRate;

@@ -49,12 +49,12 @@ export default function PressureDisplay({ measuredPressure, peep, pip }: any) {
           }}>
           <MetricDisplay
             style={styles.peep}
-            value={pip.setValue}
+            value={pip.value}
             title={pip.name}
             unit={pip.unit}></MetricDisplay>
           <MetricDisplay
             style={styles.peep}
-            value={peep.setValue}
+            value={peep.value}
             title={peep.name}
             unit={peep.unit}></MetricDisplay>
         </View>
