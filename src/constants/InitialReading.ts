@@ -30,7 +30,14 @@ export default {
   ieRatio: '1:2',
   vti: 100,
   vte: 400,
-  minuteVentilation: 100,
+  minuteVentilation: {
+    name: 'Minute Ventilation',
+    unit: 'lpm',
+    setValue: 10,
+    value: 10,
+    lowerLimit: 9,
+    upperLimit: 11,
+  },
   inspiratoryTime: 3,
   expiratoryTime: 5,
   fiO2: {

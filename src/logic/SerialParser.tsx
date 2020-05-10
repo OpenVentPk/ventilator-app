@@ -122,6 +122,17 @@ export const processSerialData = (
         upperLimit: pipUpperLimit,
       };
 
+      const setMinuteVentilation = setTidalVolme * setRespiratoryRate;
+      const measuredMinuteVentilation = getWordFloat(packet[34], packet[35], 40 / 65535, 0);
+      const minuteVentilationParameter: SetParameter = {
+        name: 'Minute Ventilation',
+        unit: 'lpm',
+        setValue: setMinuteVentilation,
+        value: measuredMinuteVentilation,
+        lowerLimit: setMinuteVentilation - (0.10 * setMinuteVentilation),
+        upperLimit: setMinuteVentilation + (0.10 * setMinuteVentilation),
+      };
+
       updateReadingStateFunction({
         peep: peepParameter,
         measuredPressure: measuredPressure,
@@ -131,7 +142,7 @@ export const processSerialData = (
         ieRatio: (packet[24] & 0x0f) + ':' + (packet[24] & 0xf0) / 16,
         vti: getWordFloat(packet[30], packet[31], 4000 / 65535, -2000),
         vte: getWordFloat(packet[32], packet[33], 4000 / 65535, -2000),
-        minuteVentilation: getWordFloat(packet[34], packet[35], 40 / 65535, 0),
+        minuteVentilation: minuteVentilationParameter,
         inspiratoryTime: 1,
         expiratoryTime: 5,
         fiO2: fiO2Parameter,

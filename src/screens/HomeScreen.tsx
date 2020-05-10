@@ -103,9 +103,9 @@ export default function HomeScreen(props: any) {
           unit={'ml'}></MetricDisplay>
         <MetricDisplay
           style={styles.configuredvaluedisplay}
-          title={'Minute Ventilation'}
-          value={readingValues.minuteVentilation}
-          unit={'slm'}></MetricDisplay>
+          title={readingValues.minuteVentilation.name}
+          value={readingValues.minuteVentilation.value}
+          unit={readingValues.minuteVentilation.unit}></MetricDisplay>
         <MetricDisplayString
           style={styles.configuredvaluedisplay}
           title={'Ventilation Mode'}
