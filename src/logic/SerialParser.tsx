@@ -76,8 +76,24 @@ export const processSerialData = (
         upperLimit: setRespiratoryRate + 1,
       };
 
+      const setPeep = packet[26] - 30;
+      const measuredPeep = getWordFloat(
+        packet[14],
+        packet[15],
+        40 / 65535,
+        -10,
+      );
+      const peepParameter: SetParameter = {
+        name: 'PEEP',
+        unit: 'cmH2O',
+        setValue: setPeep,
+        value: measuredPeep,
+        lowerLimit: 4,
+        upperLimit: 21,
+      };
+
       updateReadingStateFunction({
-        peep: packet[26] - 30,
+        peep: peepParameter,
         measuredPressure: measuredPressure,
         plateauPressure: getWordFloat(packet[16], packet[17], 90 / 65535, -30),
         respiratoryRate: respiratoryRateParameter,

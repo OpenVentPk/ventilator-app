@@ -1,7 +1,14 @@
 import Constants from './Constants';
 
 export default {
-  peep: 5,
+  peep: {
+    name: 'PEEP',
+    unit: 'cmH2O',
+    setValue: 5,
+    value: 5,
+    lowerLimit: 4,
+    upperLimit: 21,
+  },
   measuredPressure: 25,
   plateauPressure: 20,
   respiratoryRate: {
