@@ -92,6 +92,28 @@ export const processSerialData = (
         upperLimit: 21,
       };
 
+      const setPip = packet[26] - 30;
+      const measuredPip = packet[40] - 30;
+      let pipUpperLimit = null;
+      if (ventilationMode === 'VCV') {
+        pipUpperLimit = 35;
+      } else if (ventilationMode === 'PCV') {
+        pipUpperLimit = setPip + 2;
+      }
+      let pipLowerLimit = null;
+      if (ventilationMode === 'PCV') {
+        pipLowerLimit = setPip - 2;
+      }
+      const pipParameter: SetParameter = {
+        name: 'PIP',
+        unit: 'cmH20',
+        setValue: setPip,
+        value: measuredPip,
+        lowerLimit: pipLowerLimit,
+        upperLimit: pipUpperLimit,
+      };
+
+
       updateReadingStateFunction({
         peep: peepParameter,
         measuredPressure: measuredPressure,
@@ -106,7 +128,7 @@ export const processSerialData = (
         expiratoryTime: 5,
         fiO2: fiO2Parameter,
         flowRate: measuredFlowRate,
-        PIP: packet[40] - 30,
+        pip: pipParameter,
         mode: ventilationMode,
         graphPressure: pressureGraph,
         graphVolume: volumeGraph,

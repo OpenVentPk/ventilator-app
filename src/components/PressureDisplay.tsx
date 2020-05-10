@@ -49,9 +49,9 @@ export default function PressureDisplay({ measuredPressure, peep, pip }: any) {
           }}>
           <MetricDisplay
             style={styles.peep}
-            value={pip}
-            title={'PIP'}
-            unit={'cmH20'}></MetricDisplay>
+            value={pip.value}
+            title={pip.name}
+            unit={pip.unit}></MetricDisplay>
           <MetricDisplay
             style={styles.peep}
             value={peep.value}

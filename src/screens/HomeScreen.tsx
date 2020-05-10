@@ -24,7 +24,7 @@ export default function HomeScreen(props: any) {
         <PressureDisplay
           measuredPressure={readingValues.measuredPressure}
           peep={readingValues.peep}
-          pip={readingValues.PIP}></PressureDisplay>
+          pip={readingValues.pip}></PressureDisplay>
       </View>
       {/* <View style={styles.valuesandgraphs}> */}
       <View style={styles.graphs}>
