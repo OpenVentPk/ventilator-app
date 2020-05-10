@@ -81,9 +81,9 @@ export default function HomeScreen(props: any) {
           unit={readingValues.tidalVolume.unit}></MetricDisplay>
         <MetricDisplay
           style={styles.configuredvaluedisplay}
-          title={'Plateau Pressure'}
-          value={readingValues.plateauPressure}
-          unit={''}></MetricDisplay>
+          title={readingValues.plateauPressure.name}
+          value={readingValues.plateauPressure.value}
+          unit={readingValues.plateauPressure.unit}></MetricDisplay>
 
         <MetricDisplayString
           style={styles.configuredvaluedisplay}

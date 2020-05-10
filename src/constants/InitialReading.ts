@@ -10,7 +10,14 @@ export default {
     upperLimit: 21,
   },
   measuredPressure: 25,
-  plateauPressure: 20,
+  plateauPressure: {
+    name: 'Plateau Pressure',
+    unit: 'cmH2O',
+    setValue: 50,
+    value: 50,
+    lowerLimit: 51,
+    upperLimit: 49,
+  },
   respiratoryRate: {
     name: 'Patient Rate',
     upperLimit: 35,

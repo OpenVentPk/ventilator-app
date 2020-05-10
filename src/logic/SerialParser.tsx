@@ -122,6 +122,23 @@ export const processSerialData = (
         upperLimit: pipUpperLimit,
       };
 
+      const setPlateuPressure = packet[22] - 30;
+      const measuredPlateauPressure = getWordFloat(
+        packet[16],
+        packet[17],
+        90 / 65535,
+        -30,
+      );
+
+      const plateauPressureParameter: SetParameter = {
+        name: 'Plateau Pressure',
+        unit: 'cmH2O',
+        setValue: setPlateuPressure,
+        value: measuredPlateauPressure,
+        lowerLimit: setPlateuPressure - 1,
+        upperLimit: setPlateuPressure + 1,
+      };
+
       const setMinuteVentilation = setTidalVolme * setRespiratoryRate;
       const measuredMinuteVentilation = getWordFloat(packet[34], packet[35], 40 / 65535, 0);
       const minuteVentilationParameter: SetParameter = {
@@ -136,7 +153,7 @@ export const processSerialData = (
       updateReadingStateFunction({
         peep: peepParameter,
         measuredPressure: measuredPressure,
-        plateauPressure: getWordFloat(packet[16], packet[17], 90 / 65535, -30),
+        plateauPressure: plateauPressureParameter,
         respiratoryRate: respiratoryRateParameter,
         tidalVolume: tidalVolumeParameter,
         ieRatio: (packet[24] & 0x0f) + ':' + (packet[24] & 0xf0) / 16,
