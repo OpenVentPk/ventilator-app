@@ -63,13 +63,24 @@ export const processSerialData = (
         value: measuredFiO2,
         lowerLimit: setFiO2 - 10,
         upperLimit: setFiO2 + 10,
-      }
+      };
+
+      const setRespiratoryRate = packet[23];
+      const measuredRespiratoryRate = packet[39];
+      const respiratoryRateParameter: SetParameter = {
+        name: 'Patient Rate',
+        unit: 'BPM',
+        setValue: setRespiratoryRate,
+        value: measuredRespiratoryRate,
+        lowerLimit: setRespiratoryRate - 1,
+        upperLimit: setRespiratoryRate + 1,
+      };
 
       updateReadingStateFunction({
         peep: packet[26] - 30,
         measuredPressure: measuredPressure,
         plateauPressure: getWordFloat(packet[16], packet[17], 90 / 65535, -30),
-        patientRate: packet[23],
+        respiratoryRate: respiratoryRateParameter,
         tidalVolume: getWordFloat(packet[20], packet[21], 1, 0),
         ieRatio: (packet[24] & 0x0f) + ':' + (packet[24] & 0xf0) / 16,
         vti: getWordFloat(packet[30], packet[31], 4000 / 65535, -2000),

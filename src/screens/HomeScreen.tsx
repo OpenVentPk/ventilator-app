@@ -71,9 +71,9 @@ export default function HomeScreen(props: any) {
           unit={readingValues.fiO2.unit}></MetricDisplay>
         <MetricDisplay
           style={styles.configuredvaluedisplay}
-          title={'Patient Rate'}
-          value={readingValues.patientRate}
-          unit={'BPM'}></MetricDisplay>
+          title={readingValues.respiratoryRate.name}
+          value={readingValues.respiratoryRate.value}
+          unit={readingValues.respiratoryRate.unit}></MetricDisplay>
         <MetricDisplay
           style={styles.configuredvaluedisplay}
           title={'Tidal Volume'}
