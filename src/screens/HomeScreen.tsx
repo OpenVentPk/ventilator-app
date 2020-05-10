@@ -66,9 +66,9 @@ export default function HomeScreen(props: any) {
       <View style={styles.configuredvalues}>
         <MetricDisplay
           style={styles.configuredvaluedisplay}
-          title={'FiO2'}
-          value={readingValues.fiO2}
-          unit={'%'}></MetricDisplay>
+          title={readingValues.fiO2.name}
+          value={readingValues.fiO2.value}
+          unit={readingValues.fiO2.unit}></MetricDisplay>
         <MetricDisplay
           style={styles.configuredvaluedisplay}
           title={'Patient Rate'}

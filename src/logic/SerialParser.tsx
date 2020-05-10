@@ -1,6 +1,7 @@
 import Constants from '../constants/Constants';
 import Alarms from '../constants/Alarms';
 import VentilationModes from '../constants/VentilationModes';
+import SetParameter from '../interfaces/SetParameter';
 
 let pressureGraph = new Array(Constants.GraphLength).fill(0);
 let volumeGraph = new Array(Constants.GraphLength).fill(0);
@@ -53,6 +54,17 @@ export const processSerialData = (
 
       let currentAlarms = getAlarmValues(packet);
 
+      const setFiO2 = packet[25];
+      const measuredFiO2 = getWordFloat(packet[18], packet[19], 100 / 65535, 0);
+      const fiO2Parameter: SetParameter = {
+        name: 'FiO2',
+        unit: '%',
+        setValue: setFiO2,
+        value: measuredFiO2,
+        lowerLimit: setFiO2 - 10,
+        upperLimit: setFiO2 + 10,
+      }
+
       updateReadingStateFunction({
         peep: packet[26] - 30,
         measuredPressure: measuredPressure,
@@ -65,7 +77,7 @@ export const processSerialData = (
         minuteVentilation: getWordFloat(packet[34], packet[35], 40 / 65535, 0),
         inspiratoryTime: 1,
         expiratoryTime: 5,
-        fiO2: packet[25],
+        fiO2: fiO2Parameter,
         flowRate: measuredFlowRate,
         PIP: packet[40] - 30,
         mode: ventilationMode,
