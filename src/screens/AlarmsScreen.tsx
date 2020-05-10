@@ -15,9 +15,9 @@ export default function AlarmsScreen() {
   useEffect(() => {
     var parameterAlarmComponentsToShow: SetParameter[] = [
       readingValues.tidalVolume,
-      readingValues.peep,
       readingValues.plateauPressure,
       readingValues.pip,
+      readingValues.peep,
       readingValues.fiO2,
       readingValues.respiratoryRate,
       readingValues.minuteVentilation,

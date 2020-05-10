@@ -80,7 +80,7 @@ export const processSerialData = (
       const measuredPip = packet[40] - 30;
       const pipParameter: SetParameter = {
         name: 'PIP',
-        unit: 'cmH20',
+        unit: 'cmH2O',
         setValue: setInspiratoryPressure,
         value: measuredPip,
         lowerLimit: setInspiratoryPressure - 5,
