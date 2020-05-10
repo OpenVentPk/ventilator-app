@@ -54,7 +54,7 @@ export const processSerialData = (
       let currentAlarms = getAlarmValues(packet);
 
       updateReadingStateFunction({
-        peep: getWordFloat(packet[14], packet[15], 40 / 65535, -10),
+        peep: packet[26] - 30,
         measuredPressure: measuredPressure,
         plateauPressure: getWordFloat(packet[16], packet[17], 90 / 65535, -30),
         patientRate: packet[23],
@@ -82,19 +82,19 @@ export const processSerialData = (
   }
 };
 
-function processIntegrityCheck(Data: any): boolean {
-  if (Data.length > Constants.TotalPacketLength) {
+function processIntegrityCheck(packet: any): boolean {
+  if (packet.length > Constants.TotalPacketLength) {
     return false;
   }
   let crc = 0;
-  for (let i = 0; i < Data.length - 2; i++) {
-    crc = (crc ^ Data[i]) & 0xff;
+  for (let i = 0; i < packet.length - 2; i++) {
+    crc = (crc ^ packet[i]) & 0xff;
   }
-  if (crc == Data[Data.length - 2]) return true;
+  if (crc == packet[packet.length - 2]) return true;
   else {
     var data = '';
-    for (let i = 0; i < Data.length; i++) {
-      data = data + ' ' + parseInt(Data[i]);
+    for (let i = 0; i < packet.length; i++) {
+      data = data + ' ' + parseInt(packet[i]);
     }
     console.log('crc failed ' + data);
   }
