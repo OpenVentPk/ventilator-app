@@ -29,8 +29,6 @@ export default function AlarmsScreen() {
         4,
       );
     });
-
-
   }, [readingValues]);
 
   return (
