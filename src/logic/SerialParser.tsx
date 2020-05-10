@@ -21,13 +21,22 @@ export const processSerialData = (
     if (interval > Constants.UpdateInterval) {
       interval = 0;
 
-      const measuredVolume = getWordFloat(
+      const setTidalVolme = getWordFloat(packet[20], packet[21], 1, 0);
+      const measuredTidalVolume = getWordFloat(
         packet[8],
         packet[9],
         4000 / 65535,
         -2000,
       );
-      addValueToGraph(measuredVolume, volumeGraph, counterForGraphs);
+      addValueToGraph(measuredTidalVolume, volumeGraph, counterForGraphs);
+      const tidalVolumeParameter: SetParameter = {
+        name: 'Tidal Volume',
+        unit: 'ml',
+        setValue: setTidalVolme,
+        value: measuredTidalVolume,
+        lowerLimit: setTidalVolme - (0.15 * setTidalVolme),
+        upperLimit: setTidalVolme + (0.15 * setTidalVolme),
+      };
 
       const measuredFlowRate = getWordFloat(
         packet[12],
@@ -113,13 +122,12 @@ export const processSerialData = (
         upperLimit: pipUpperLimit,
       };
 
-
       updateReadingStateFunction({
         peep: peepParameter,
         measuredPressure: measuredPressure,
         plateauPressure: getWordFloat(packet[16], packet[17], 90 / 65535, -30),
         respiratoryRate: respiratoryRateParameter,
-        tidalVolume: getWordFloat(packet[20], packet[21], 1, 0),
+        tidalVolume: tidalVolumeParameter,
         ieRatio: (packet[24] & 0x0f) + ':' + (packet[24] & 0xf0) / 16,
         vti: getWordFloat(packet[30], packet[31], 4000 / 65535, -2000),
         vte: getWordFloat(packet[32], packet[33], 4000 / 65535, -2000),
