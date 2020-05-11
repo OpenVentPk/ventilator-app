@@ -17,7 +17,7 @@ export default function HomeScreen(props: any) {
   const readingValues = reading.values;
   const ventilatorConfig = initalVentilatorConfiguration;
 
-  console.log('homescreen ' + JSON.stringify(readingValues.minuteVentilation));
+  // console.log('homescreen ' + JSON.stringify(readingValues.minuteVentilation));
   return (
     <View style={styles.container}>
       <View style={styles.pressureDisplay}>
@@ -75,18 +75,16 @@ export default function HomeScreen(props: any) {
           title={readingValues.respiratoryRate.name}
           value={readingValues.respiratoryRate.setValue}
           unit={readingValues.respiratoryRate.unit}></MetricDisplay>
-        <MetricDisplay
-          style={styles.configuredvaluedisplay}
-          title={readingValues.tidalVolume.name}
-          value={readingValues.tidalVolume.setValue}
-          unit={readingValues.tidalVolume.unit}></MetricDisplay>
-
         <MetricDisplayString
           style={styles.configuredvaluedisplay}
           title={'I:E Ratio'}
           value={readingValues.ieRatio}
           unit={''}></MetricDisplayString>
-
+        <MetricDisplay
+          style={styles.configuredvaluedisplay}
+          title={readingValues.tidalVolume.name}
+          value={readingValues.tidalVolume.setValue}
+          unit={readingValues.tidalVolume.unit}></MetricDisplay>
         <MetricDisplay
           style={styles.configuredvaluedisplay}
           title={'VTi'}

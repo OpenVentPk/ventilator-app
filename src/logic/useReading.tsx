@@ -26,7 +26,7 @@ export const useReading = () => {
 // Provider hook that creates auth object and handles state
 function useProvideReading() {
   const [reading, setReading] = useState(InitialReading);
-  // const dummyGenerator = DummyDataGenerator(setReading, 20);
+  const dummyGenerator = DummyDataGenerator(setReading, 20);
   const serialDataHandler = SerialDataHandler({ baudRate: 115200 }, setReading);
 
   // Subscribe to user on mount
@@ -34,19 +34,19 @@ function useProvideReading() {
   // ... component that utilizes this hook to re-render with the ...
   // ... latest auth object.
   useEffect(() => {
-    serialDataHandler.startUsbListener();
+    // serialDataHandler.startUsbListener();
     console.log('starting generator');
-    // dummyGenerator.startGenerating();
+    dummyGenerator.startGenerating();
     // Cleanup subscription on unmount
-    return () => {
-      async function stopUSBListener() {
-        await serialDataHandler.stopUsbListener();
-      }
-    };
-    // return () => dummyGenerator.stopGenerating();
-    // }, []);
-  }, [serialDataHandler.state.connected]);
-
+    // return () => {
+    //   async function stopUSBListener() {
+    //     await serialDataHandler.stopUsbListener();
+    //   }
+    // };
+    return () => dummyGenerator.stopGenerating();
+  }, []);
+  // }, [serialDataHandler.state.connected]);
+  // },[]);
   // Return the user object and auth methods
   return {
     values: reading,
