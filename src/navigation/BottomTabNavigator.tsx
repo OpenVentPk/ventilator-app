@@ -74,7 +74,7 @@ export default function BottomTabNavigator({
         name="Main"
         component={HomeScreen}
         options={{
-          title: 'main',
+          title: 'Main',
           tabBarIcon: ({ focused }) => (
             <TabBarIcon focused={focused} name="md-code-working" />
           ),
@@ -84,7 +84,7 @@ export default function BottomTabNavigator({
         name="Alarms"
         component={AlarmsScreen}
         options={{
-          title: 'Alarms',
+          title: 'Alarms and Monitoring',
           tabBarIcon: ({ focused }) => (
             <TabBarIcon focused={focused} name="md-alert" />
           ),
