@@ -4,7 +4,12 @@ import { BarChart, Grid, YAxis } from 'react-native-svg-charts';
 import MetricDisplay from './MetricDisplay';
 import Colors from '../constants/Colors';
 
-export default function PressureDisplay({ measuredPressure, peep, pip }: any) {
+export default function PressureDisplay({
+  measuredPressure,
+  peep,
+  pip,
+  plateauPressure,
+}: any) {
   return (
     <View style={{ color: Colors.Borders, height: '100%' }}>
       {/* <Text style={{ color: "grey", alignSelf: "center" }}>Peak Pressure</Text> */}
@@ -15,7 +20,7 @@ export default function PressureDisplay({ measuredPressure, peep, pip }: any) {
       <View style={{}}>
         <View style={styles.peepgaugewithaxis}>
           <YAxis
-            data={[0, 100]}
+            data={[0, 80]}
             contentInset={{ top: 4, bottom: 3 }}
             svg={{
               fill: Colors.TextColor,
@@ -30,7 +35,7 @@ export default function PressureDisplay({ measuredPressure, peep, pip }: any) {
             // contentInset={contentInset}
             style={styles.peepgauge}
             yMin={0}
-            yMax={100}
+            yMax={80}
             data={[measuredPressure]}
             svg={{ fill: Colors.BarColor }}
             animate={true}
@@ -57,6 +62,11 @@ export default function PressureDisplay({ measuredPressure, peep, pip }: any) {
             value={peep.value}
             title={peep.name}
             unit={peep.unit}></MetricDisplay>
+          <MetricDisplay
+            style={styles.peep}
+            title={plateauPressure.name}
+            value={plateauPressure.value}
+            unit={plateauPressure.unit}></MetricDisplay>
         </View>
       </View>
     </View>
@@ -72,7 +82,7 @@ export default function PressureDisplay({ measuredPressure, peep, pip }: any) {
 const styles = StyleSheet.create({
   peepgaugewithaxis: {
     flexDirection: 'row',
-    height: '67%',
+    height: '59%',
     paddingTop: 10,
     paddingBottom: 20,
     padding: 5,

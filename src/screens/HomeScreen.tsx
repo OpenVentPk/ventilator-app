@@ -17,14 +17,15 @@ export default function HomeScreen(props: any) {
   const readingValues = reading.values;
   const ventilatorConfig = initalVentilatorConfiguration;
 
-  // console.log('homescreen');
+  console.log('homescreen ' + JSON.stringify(readingValues.minuteVentilation));
   return (
     <View style={styles.container}>
       <View style={styles.pressureDisplay}>
         <PressureDisplay
           measuredPressure={readingValues.measuredPressure}
           peep={readingValues.peep}
-          pip={readingValues.pip}></PressureDisplay>
+          pip={readingValues.pip}
+          plateauPressure={readingValues.plateauPressure}></PressureDisplay>
       </View>
       {/* <View style={styles.valuesandgraphs}> */}
       <View style={styles.graphs}>
@@ -42,12 +43,12 @@ export default function HomeScreen(props: any) {
         <View style={{ flex: 1, paddingTop: 0, paddingBottom: 0 }}>
           <Graphs
             data={readingValues.graphVolume}
-            yMin={0}
-            yMax={800}
+            yMin={-250}
+            yMax={600}
             numberOfTicks={4}
             fillColor={Colors.graphVolume}
             strokeColor={Colors.graphVolumeStrokeColor}
-          // style={{ maxheight: "50%" }}
+            // style={{ maxheight: "50%" }}
           ></Graphs>
         </View>
         <Text style={styles.graphTitle}>Flow Rate [lpm]</Text>
@@ -59,7 +60,7 @@ export default function HomeScreen(props: any) {
             numberOfTicks={4}
             fillColor={Colors.graphFlow}
             strokeColor={Colors.graphFlowStrokeColor}
-          // style={{ maxheight: "50%" }}
+            // style={{ maxheight: "50%" }}
           ></Graphs>
         </View>
       </View>
@@ -79,11 +80,6 @@ export default function HomeScreen(props: any) {
           title={readingValues.tidalVolume.name}
           value={readingValues.tidalVolume.setValue}
           unit={readingValues.tidalVolume.unit}></MetricDisplay>
-        <MetricDisplay
-          style={styles.configuredvaluedisplay}
-          title={readingValues.plateauPressure.name}
-          value={readingValues.plateauPressure.value}
-          unit={readingValues.plateauPressure.unit}></MetricDisplay>
 
         <MetricDisplayString
           style={styles.configuredvaluedisplay}

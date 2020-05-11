@@ -13,8 +13,8 @@ const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'Main';
 
 function LogoTitle(props: any) {
-  const screenName = getHeaderTitle(props.route.name);
-  console.log('title' + screenName);
+  const screenName = getHeaderTitle(props.route);
+  console.log('title' + JSON.stringify(props.route));
   const screenwidth = Dimensions.get('window').width - 30;
   return (
     <View
@@ -50,6 +50,7 @@ export default function BottomTabNavigator({
   // currently active tab. Learn more in the documentation:
   // https://reactnavigation.org/docs/en/screen-options-resolution.html
   navigation.setOptions({
+    // console.log(JSON.stringify(route)),
     headerTitle: (props: any) => <LogoTitle route={route} {...props} />,
     // headerTitle: <LogoTitle></LogoTitle>,
     headerTintColor: Colors.TextColor,
@@ -73,6 +74,7 @@ export default function BottomTabNavigator({
         name="Main"
         component={HomeScreen}
         options={{
+          title: 'main',
           tabBarIcon: ({ focused }) => (
             <TabBarIcon focused={focused} name="md-code-working" />
           ),
@@ -82,7 +84,7 @@ export default function BottomTabNavigator({
         name="Alarms"
         component={AlarmsScreen}
         options={{
-          // title: 'Alarms',
+          title: 'Alarms',
           tabBarIcon: ({ focused }) => (
             <TabBarIcon focused={focused} name="md-alert" />
           ),
