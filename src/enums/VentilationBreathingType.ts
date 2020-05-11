@@ -8,7 +8,7 @@ export class VentilationBreathingTypeUtils {
     breathingType: VentilationBreathingType,
   ): string {
     if (breathingType === VentilationBreathingType.Assisted) {
-      return 'AC-V';
+      return 'AC-';
     } else {
       return 'V';
     }

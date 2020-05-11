@@ -50,7 +50,6 @@ export default function BottomTabNavigator({
   // currently active tab. Learn more in the documentation:
   // https://reactnavigation.org/docs/en/screen-options-resolution.html
   navigation.setOptions({
-    // console.log(JSON.stringify(route)),
     headerTitle: (props: any) => <LogoTitle route={route} {...props} />,
     // headerTitle: <LogoTitle></LogoTitle>,
     headerTintColor: Colors.TextColor,
@@ -58,7 +57,6 @@ export default function BottomTabNavigator({
       backgroundColor: Colors.GeneralBackGround,
     },
   });
-  // console.log(JSON.stringify(route));
   return (
     <BottomTab.Navigator
       initialRouteName={INITIAL_ROUTE_NAME}

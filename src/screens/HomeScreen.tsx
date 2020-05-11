@@ -17,7 +17,6 @@ export default function HomeScreen(props: any) {
   const readingValues = reading.values;
   const ventilatorConfig = initalVentilatorConfiguration;
 
-  // console.log('homescreen ' + JSON.stringify(readingValues.minuteVentilation));
   return (
     <View style={styles.container}>
       <View style={styles.pressureDisplay}>

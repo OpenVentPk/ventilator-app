@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { BarChart, Grid, YAxis } from 'react-native-svg-charts';
 import MetricDisplay from './MetricDisplay';
 import Colors from '../constants/Colors';
+import InitialReading from '../constants/InitialReading';
 
 export default function PressureDisplay({
   measuredPressure,
@@ -20,7 +21,7 @@ export default function PressureDisplay({
       <View style={{}}>
         <View style={styles.peepgaugewithaxis}>
           <YAxis
-            data={[0, 80]}
+            data={[0, InitialReading.pressureGraph.upperLimit]}
             contentInset={{ top: 4, bottom: 3 }}
             svg={{
               fill: Colors.TextColor,
@@ -34,8 +35,8 @@ export default function PressureDisplay({
           <BarChart
             // contentInset={contentInset}
             style={styles.peepgauge}
-            yMin={0}
-            yMax={80}
+            yMin={InitialReading.pressureGraph.lowerLimit}
+            yMax={InitialReading.pressureGraph.upperLimit}
             data={[measuredPressure]}
             svg={{ fill: Colors.BarColor }}
             animate={true}
