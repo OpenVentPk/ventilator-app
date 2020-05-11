@@ -114,7 +114,7 @@ function getHeaderTitle(route: any) {
     case 'Parameters':
       return 'Parameters';
     case 'Alarms':
-      return 'Alarms';
+      return 'Alarms and Monitoring';
     case 'Monitoring':
       return 'Monitoring';
     case 'LungMechanics':
