@@ -71,7 +71,6 @@ export default function PressureDisplay({
             title={peep.name}
             unit={peep.unit}
           />
-
         </View>
       </View>
     </View>
