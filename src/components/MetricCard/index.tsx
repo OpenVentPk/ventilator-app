@@ -55,9 +55,7 @@ const MetricCard = ({
       </LimitsContainer>
       <CurrentValueContainer>
         <View style={{ flex: 1, justifyContent: 'center' }}>
-          <PresetValue>
-            {setValueText ? setValueText : setValue.toFixed(0)}
-          </PresetValue>
+          <PresetValue>{setValueText || setValue.toFixed(0)}</PresetValue>
         </View>
         <ValueWrapper>
           <Value color={colour}>{value.toFixed(0)}</Value>
