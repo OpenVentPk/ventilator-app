@@ -34,8 +34,8 @@ function LogoTitle(props: any) {
         {screenName}
       </Text>
       <Image
-        style={{ width: 150, height: 150 }}
-        source={require('../img/transparent-logo-transparent-adjusted.png')}
+        style={{ width: 150, height: 50 }}
+        source={require('../img/openventpk-logo-transparent-1600x-dark.png')}
       />
     </View>
   );
@@ -63,8 +63,8 @@ export default function BottomTabNavigator({
       tabBarOptions={{
         activeBackgroundColor: Colors.generalBackGround,
         inactiveBackgroundColor: Colors.generalBackGround,
-        activeTintColor: Colors.activeText,
-        inactiveTintColor: Colors.inactiveText,
+        activeTintColor: Colors.tabActive,
+        inactiveTintColor: Colors.tabInactive,
         showLabel: true,
       }}
       screenOptions={{}}>
