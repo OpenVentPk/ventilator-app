@@ -47,7 +47,7 @@ export default function HomeScreen(props: any) {
             numberOfTicks={4}
             fillColor={Colors.graphVolume}
             strokeColor={Colors.graphVolumeStrokeColor}
-            // style={{ maxheight: "50%" }}
+          // style={{ maxheight: "50%" }}
           ></Graphs>
         </View>
         <Text style={styles.graphTitle}>Flow Rate [lpm]</Text>
@@ -59,7 +59,8 @@ export default function HomeScreen(props: any) {
             numberOfTicks={4}
             fillColor={Colors.graphFlow}
             strokeColor={Colors.graphFlowStrokeColor}
-            // style={{ maxheight: "50%" }}
+            markers={readingValues.breathMarkers}
+          // style={{ maxheight: "50%" }}
           ></Graphs>
         </View>
       </View>

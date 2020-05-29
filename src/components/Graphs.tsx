@@ -30,7 +30,7 @@ export default function Graphs(props: any) {
             svg={{ fill: props.fillColor, stroke: props.strokeColor, strokeWidth: 3 }}
             numberOfTicks={props.numberOfTicks}>
             <Grid numberOfTicks={2} svg={{ stroke: Colors.generalBackGround, fill: 'none' }}></Grid>
-            <Markers markerIndices={[10, 50, 100]} markerHeight={(props.yMax - props.yMin) * 0.1} />
+            <Markers markerIndices={props.markers} markerHeight={(props.yMax - props.yMin) * 0.1} />
           </AreaChart>
         </View>
       </View>

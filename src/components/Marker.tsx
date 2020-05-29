@@ -2,9 +2,11 @@ import * as React from 'react';
 import { Polygon } from 'react-native-svg';
 
 export default function Markers({ x, y, markerIndices, markerHeight }) {
+  if (markerIndices === undefined) {
+    markerIndices = [];
+  }
 
-  return (
-    markerIndices.map((markerIndex: number) => (
+  return markerIndices.map((markerIndex: number) => (
     <Polygon
       key={markerIndex}
       points={[
@@ -14,8 +16,6 @@ export default function Markers({ x, y, markerIndices, markerHeight }) {
       ]}
       stroke="white"
       fill="white"
-      />
-    ))
-  );
+    />
+  ));
 }
-
