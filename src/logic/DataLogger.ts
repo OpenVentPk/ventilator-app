@@ -4,10 +4,11 @@ import SetParameter from '../interfaces/SetParameter';
 import DataConfig from '../constants/DataConfig';
 import { BreathingPhase } from '../enums/BreathingPhase';
 
+// TODO: Add serial data packets also
 export default function dataLogger() {
   const nowTimeStamp: string = new Date().toISOString().replace(/\.|:/g, '-');
-  const logDirectory: string = `${RNFS.ExternalDirectoryPath}/readings`;
-  const logFile: string = `${nowTimeStamp}-readings.csv`;
+  const logDirectory: string = `${RNFS.ExternalDirectoryPath}/sessions`;
+  const logFile: string = `${nowTimeStamp}.csv`;
   const folderCreationPromise = RNFS.mkdir(logDirectory);
   let readingsCsv: string[] = [getDataHeaders()];
   const logFrequency: number =
