@@ -1,20 +1,34 @@
 import * as RNFS from 'react-native-fs';
 import Alarms from '../constants/Alarms';
 import SetParameter from '../interfaces/SetParameter';
+import DataConfig from '../constants/DataConfig';
 
 export default function dataLogger() {
   const nowTimeStamp: string = new Date().toISOString().replace(/\.|:/g, '-');
   const logDirectory: string = `${RNFS.ExternalDirectoryPath}/readings`;
   const logFile: string = `${nowTimeStamp}-readings.csv`;
-
   const folderCreationPromise = RNFS.mkdir(logDirectory);
+  let readingsCsv: string[] = [];
+  const logFrequency: number =
+    (DataConfig.graphLength / DataConfig.dataFrequency) * 1000; // log every time the graph clears
+  let intervalFunction: number = setInterval(() => {
+    if (readingsCsv.length > 0) {
+      writeToLogFile();
+    }
+  }, logFrequency);
 
   function onDataReading(reading: any) {
-    var readingInCsv = getCsvFormat(reading);
+    const readingInCsv = getCsvFormat(reading);
+    readingsCsv.push(readingInCsv);
+  }
+
+  function writeToLogFile() {
+    const readingsToAdd: string = readingsCsv.join('\n');
     folderCreationPromise.then(() => {
-      RNFS.write(`${logDirectory}/${logFile}`, readingInCsv)
+      RNFS.write(`${logDirectory}/${logFile}`, readingsToAdd)
         .then(() => {
           console.log(`written to ${logFile}`);
+          readingsCsv = [];
         })
         .catch((err) => {
           console.log(err.message);
@@ -43,6 +57,7 @@ export default function dataLogger() {
       breathingPhase,
     } = reading;
     let readingsString: string = [
+      new Date().toISOString(),
       peep,
       measuredPressure,
       plateauPressure,
@@ -62,10 +77,6 @@ export default function dataLogger() {
       getAlarmsInCsvFormat(alarms),
     ].join(',');
     return readingsString;
-  }
-
-  function getSetParameterCsvFormat(parameter: SetParameter): string {
-
   }
 
   function getAlarmsInCsvFormat(alarms: string[]): string {
