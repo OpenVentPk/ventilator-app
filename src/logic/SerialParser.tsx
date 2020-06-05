@@ -158,8 +158,9 @@ export const processSerialData = (
       upperLimit: Math.ceil(setMinuteVentilation + 0.1 * setMinuteVentilation),
     };
     const reading: any = {
-      peep: peepParameter,
       measuredPressure: measuredPressure,
+      peep: peepParameter,
+      pip: pipParameter,
       plateauPressure: plateauPressureParameter,
       respiratoryRate: respiratoryRateParameter,
       tidalVolume: tidalVolumeParameter,
@@ -167,11 +168,8 @@ export const processSerialData = (
       vti: getWordFloat(packet[30], packet[31], 4000 / 65535, -2000),
       vte: getWordFloat(packet[32], packet[33], 4000 / 65535, -2000),
       minuteVentilation: minuteVentilationParameter,
-      inspiratoryTime: 1,
-      expiratoryTime: 5,
       fiO2: fiO2Parameter,
       flowRate: measuredFlowRate,
-      pip: pipParameter,
       mode: ventilationMode,
       graphPressure: pressureGraph,
       graphVolume: volumeGraph,
