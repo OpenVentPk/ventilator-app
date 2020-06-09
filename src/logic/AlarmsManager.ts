@@ -40,7 +40,7 @@ function AlarmsManager() {
       type: 'danger',
       icon: 'danger',
       autoHide: false,
-      hideOnPress: true,
+      hideOnPress: false,
       onPress: () => {
         alarmSound.stop();
       },
