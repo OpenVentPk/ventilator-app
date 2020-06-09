@@ -38,7 +38,7 @@ function AlarmsManager() {
       message: 'Alarm(s) active',
       description: alarmsText,
       type: 'danger',
-      icon: 'danger',
+      icon: 'warning',
       autoHide: false,
       hideOnPress: false,
       onPress: () => {
