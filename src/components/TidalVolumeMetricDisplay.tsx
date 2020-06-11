@@ -3,15 +3,15 @@ import MetricDisplay from './MetricDisplay';
 
 export default function TidalVolumeMetricDisplay(props: any) {
   const { ventilationMode, parameter } = props;
-  let parameterValueToShow = parameter.setValue;
-  if (ventilationMode === 'PCV' || ventilationMode === 'AC-PCV') {
-    parameterValueToShow = null;
+
+  function isPressureControlledVentilationMode(): boolean {
+    return ventilationMode === 'PCV' || ventilationMode === 'AC-PCV';
   }
 
   return (
     <MetricDisplay
       title={parameter.name}
-      value={parameterValueToShow}
+      value={isPressureControlledVentilationMode() ? null : parameter.setValue}
       unit={parameter.unit}
     />
   );
