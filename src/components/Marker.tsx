@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Polygon } from 'react-native-svg';
 
+// TODO: Use interface for props rather than destructuring here
 export default function Markers({ x, y, markerIndices, markerHeight }: any) {
   if (markerIndices === undefined) {
     markerIndices = [];
