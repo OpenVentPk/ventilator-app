@@ -41,7 +41,7 @@ function LogoTitle(props: any) {
   );
 }
 
-export default function BottomTabNavigator({ navigation, route }) {
+export default function BottomTabNavigator({ navigation, route }: any) {
   // Set the header title on the parent stack navigator depending on the
   // currently active tab. Learn more in the documentation:
   // https://reactnavigation.org/docs/en/screen-options-resolution.html

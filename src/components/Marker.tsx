@@ -11,9 +11,9 @@ export default function Markers({ x, y, markerIndices, markerHeight }: any) {
     <Polygon
       key={markerIndex}
       points={[
-        [x(markerIndex), y(-5)],
-        [x(markerIndex - 5), y(-5 - markerHeight)],
-        [x(markerIndex + 5), y(-5 - markerHeight)],
+        `${x(markerIndex)}, ${y(-5)}`,
+        `${x(markerIndex - 5)}, ${y(-5 - markerHeight)}`,
+        `${x(markerIndex + 5)}, ${y(-5 - markerHeight)}`,
       ]}
       stroke="white"
       fill="white"
