@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Polygon } from 'react-native-svg';
 
-export default function Markers({ x, y, markerIndices, markerHeight }) {
+export default function Markers({ x, y, markerIndices, markerHeight }: any) {
   if (markerIndices === undefined) {
     markerIndices = [];
   }
