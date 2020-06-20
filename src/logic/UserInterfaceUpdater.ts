@@ -4,6 +4,7 @@ import { BreathingPhase } from '../enums/BreathingPhase';
 export default function userInterfaceUpdate(
   hookUpdateFunction: (value: any) => void,
 ) {
+  console.log('user interface created');
   let pressureGraph = new Array(DataConfig.graphLength).fill(null);
   let volumeGraph = new Array(DataConfig.graphLength).fill(null);
   let flowRateGraph = new Array(DataConfig.graphLength).fill(null);

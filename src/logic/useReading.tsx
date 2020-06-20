@@ -25,8 +25,8 @@ export const useReading = () => {
 // Provider hook that creates auth object and handles state
 function useProvideReading() {
   const [reading, setReading] = useState(InitialReading);
-
-  const isTestMode = false;
+  const isTestMode = true;
+  console.log('calling provide reading');
   const dataOrchestrator = DataOrchestrator(setReading, isTestMode);
 
   // Subscribe to user on mount
@@ -40,7 +40,7 @@ function useProvideReading() {
     return function cleanUp() {
       dataOrchestrator.stopOrchestrating();
     };
-  }, []);
+  }, [dataOrchestrator]);
 
   // Return the user object and auth methods
   return {

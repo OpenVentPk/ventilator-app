@@ -10,6 +10,7 @@ export default function dataOrchestrator(
   hookUpdateFunction: (value: any) => void,
   testMode: boolean = false,
 ) {
+  console.log('creating orchestrator');
   const userInterfaceUpdater = UserInterfaceUpdater(hookUpdateFunction);
   const dataLogger = DataLogger();
   const serialDataHandler: SerialDataRetriever = SerialDataHandler(

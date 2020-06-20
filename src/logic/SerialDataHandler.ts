@@ -11,7 +11,7 @@ import SerialDataRetriever from '../interfaces/SerialDataRetriever';
 
 export default function SerialDataHandler(
   serialParameters: any,
-  newPacketFunction: (value: any) => void,
+  onNewPacket: (value: any) => void,
 ): SerialDataRetriever {
   let SerialBuffer = new Array(0);
 
@@ -82,7 +82,7 @@ export default function SerialDataHandler(
           );
 
           SerialBuffer = SerialBuffer.concat(RemainingData);
-          newPacketFunction(SerialBuffer);
+          onNewPacket(SerialBuffer);
           SerialBuffer = [];
         } else {
           SerialBuffer = SerialBuffer.concat(data.payload);
@@ -101,7 +101,7 @@ export default function SerialDataHandler(
                 DataConfig.totalPacketLength,
               );
               SerialBuffer = SerialBuffer.concat(RemainingData);
-              processSerialData(SerialBuffer, newPacketFunction);
+              processSerialData(SerialBuffer, onNewPacket);
               SerialBuffer = [];
             } else {
               SerialBuffer = SerialBuffer.concat(RemainingData);
