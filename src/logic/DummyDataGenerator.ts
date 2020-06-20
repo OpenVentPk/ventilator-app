@@ -1,9 +1,10 @@
 import { processSerialData } from './SerialParser';
+import SerialDataRetriever from '../interfaces/SerialDataRetriever';
 
 export default function dummyDataGenerator(
   updateReadingStateFunction: (value: any) => void,
   dataFrequency: number,
-) {
+): SerialDataRetriever {
   let intervalFunction: number;
   const intervalFrequency = 1000 / dataFrequency;
   let data: string = '';
@@ -35,7 +36,7 @@ export default function dummyDataGenerator(
   }
 
   return {
-    startGenerating,
-    stopGenerating,
+    start: startGenerating,
+    stop: stopGenerating,
   };
 }

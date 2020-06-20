@@ -7,7 +7,6 @@ import DataLogger from './DataLogger';
 
 let totalPackets = 0;
 let failedPackets = 0;
-const dataLogger = DataLogger();
 
 export const processSerialData = (
   packet: any,
@@ -154,7 +153,6 @@ export const processSerialData = (
       alarms: currentAlarms,
       breathingPhase: breathingPhase,
     };
-    dataLogger.onDataReading(reading);
 
     totalPackets++;
     updateReadingStateFunction(reading);
