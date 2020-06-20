@@ -31,7 +31,7 @@ function useProvideReading() {
   // component that utilizes this hook to re-render with the
   // latest auth object.
   useEffect(() => {
-    const isTestMode: boolean = true;
+    const isTestMode: boolean = false;
     DataOrchestrator.startOrchestrating(setReading, isTestMode);
 
     // Cleanup subscription on unmount

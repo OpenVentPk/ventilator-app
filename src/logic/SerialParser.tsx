@@ -3,7 +3,6 @@ import Alarms from '../constants/Alarms';
 import VentilationModes from '../constants/VentilationModes';
 import SetParameter from '../interfaces/SetParameter';
 import { BreathingPhase } from '../enums/BreathingPhase';
-import DataLogger from './DataLogger';
 
 let totalPackets = 0;
 let failedPackets = 0;
@@ -14,7 +13,6 @@ export const processSerialData = (
 ) => {
   totalPackets++;
   if (processIntegrityCheck(packet)) {
-
     const setTidalVolume = getWordFloat(packet[20], packet[21], 1, 0);
     const measuredTidalVolume = getWordFloat(
       packet[8],

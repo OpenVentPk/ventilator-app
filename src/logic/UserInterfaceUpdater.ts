@@ -27,8 +27,8 @@ export default function userInterfaceUpdate(
   }
 
   function updateGraphs(reading: any): void {
-    addValueToGraph(reading.measuredTidalVolume, volumeGraph, counterForGraphs);
-    addValueToGraph(reading.measuredFlowRate, flowRateGraph, counterForGraphs);
+    addValueToGraph(reading.tidalVolume.value, volumeGraph, counterForGraphs);
+    addValueToGraph(reading.flowRate, flowRateGraph, counterForGraphs);
     addValueToGraph(reading.measuredPressure, pressureGraph, counterForGraphs);
   }
 
