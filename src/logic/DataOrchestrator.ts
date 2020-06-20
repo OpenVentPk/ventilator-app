@@ -6,24 +6,11 @@ import DummyDataGenerator from './DummyDataGenerator';
 import SerialDataRetriever from 'src/interfaces/SerialDataRetriever';
 import DataConfig from '../constants/DataConfig';
 
-export default function dataOrchestrator(
-  hookUpdateFunction: (value: any) => void,
-  testMode: boolean = false,
-) {
+function DataOrchestrator() {
   console.log('creating orchestrator');
-  const userInterfaceUpdater = UserInterfaceUpdater(hookUpdateFunction);
+  let userInterfaceUpdater: any;
   const dataLogger = DataLogger();
-  const serialDataHandler: SerialDataRetriever = SerialDataHandler(
-    { baudRate: 115200 },
-    onPacketReceived,
-  );
-  const dummyGenerator: SerialDataRetriever = DummyDataGenerator(
-    onPacketReceived,
-    DataConfig.dataFrequency,
-  );
-  const dataPacketRetriever: SerialDataRetriever = testMode
-    ? dummyGenerator
-    : serialDataHandler;
+  let dataPacketRetriever: SerialDataRetriever;
 
   function onPacketReceived(dataPacket: any) {
     processSerialData(dataPacket, onDataParsed);
@@ -34,9 +21,22 @@ export default function dataOrchestrator(
     dataLogger.onDataReading(reading);
   }
 
-  function startOrchestrating() {
+  function startOrchestrating(
+    hookUpdateFunction: (value: any) => void,
+    testMode: boolean = false,
+  ) {
+    dataPacketRetriever = createDataRetriever(testMode);
+    userInterfaceUpdater = UserInterfaceUpdater(hookUpdateFunction);
     console.log('starting orchestrator');
     dataPacketRetriever.start();
+  }
+
+  function createDataRetriever(isTestMode: boolean) {
+    if (isTestMode) {
+      return DummyDataGenerator(onPacketReceived, DataConfig.dataFrequency);
+    } else {
+      return SerialDataHandler({ baudRate: 115200 }, onPacketReceived);
+    }
   }
 
   function stopOrchestrating() {
@@ -48,3 +48,5 @@ export default function dataOrchestrator(
     stopOrchestrating,
   };
 }
+
+export default DataOrchestrator();

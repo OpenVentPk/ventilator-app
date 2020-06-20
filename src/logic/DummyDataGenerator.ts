@@ -1,4 +1,3 @@
-import { processSerialData } from './SerialParser';
 import SerialDataRetriever from '../interfaces/SerialDataRetriever';
 
 export default function dummyDataGenerator(

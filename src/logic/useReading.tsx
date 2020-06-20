@@ -25,22 +25,20 @@ export const useReading = () => {
 // Provider hook that creates auth object and handles state
 function useProvideReading() {
   const [reading, setReading] = useState(InitialReading);
-  const isTestMode = true;
-  console.log('calling provide reading');
-  const dataOrchestrator = DataOrchestrator(setReading, isTestMode);
 
   // Subscribe to user on mount
   // Because this sets state in the callback it will cause any
   // component that utilizes this hook to re-render with the
   // latest auth object.
   useEffect(() => {
-    dataOrchestrator.startOrchestrating();
+    const isTestMode: boolean = true;
+    DataOrchestrator.startOrchestrating(setReading, isTestMode);
 
     // Cleanup subscription on unmount
     return function cleanUp() {
-      dataOrchestrator.stopOrchestrating();
+      DataOrchestrator.stopOrchestrating();
     };
-  }, [dataOrchestrator]);
+  }, []);
 
   // Return the user object and auth methods
   return {
