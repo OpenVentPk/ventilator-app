@@ -255,7 +255,7 @@ function addGapToGraph(
 function getAlarmValues(serialData: Array<number>): Array<string> {
   let alarms: Array<string> = [];
   var bits = 8;
-  var alarmIndices = [27, 41, 42];
+  var alarmIndices = [27, 41, 42, 43];
   for (
     let alarmIndex = 0;
     alarmIndex < bits * alarmIndices.length;
