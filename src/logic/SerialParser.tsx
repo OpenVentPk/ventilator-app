@@ -225,6 +225,7 @@ function getWordFloat(
   return (ByteL + ByteH * 256) * multiplier + offset;
 }
 
+<<<<<<< HEAD
 function addValueToGraph(
   value: number,
   graph: number[],
@@ -253,6 +254,9 @@ function addGapToGraph(
 }
 
 function getAlarmValues(serialData: Array<number>): Array<string> {
+=======
+export function getAlarmValues(serialData: Array<number>): Array<string> {
+>>>>>>> 1c15d30... add testing
   let alarms: Array<string> = [];
   var bits = 8;
   var alarmIndices = [27, 41, 42, 43];
