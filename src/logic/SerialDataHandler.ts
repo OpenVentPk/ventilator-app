@@ -7,6 +7,7 @@ import {
 } from 'react-native-serialport';
 import DataConfig from '../constants/DataConfig';
 import { processSerialData } from './SerialParser';
+import { log } from './AppLogger';
 export default function SerialDataHandler(
   serialParameters: any,
   updateReadingStateFunction: (value: any) => void,
@@ -55,18 +56,6 @@ export default function SerialDataHandler(
 
   function onReadData(data: any) {
     let RemainingData = 0;
-
-    // var RNFS = require('react-native-fs');
-
-    // create a path you want to write to
-    // :warning: on iOS, you cannot write into `RNFS.MainBundlePath`,
-    // but `RNFS.DocumentDirectoryPath` exists on both platforms and is writable
-    // var path = RNFS.DocumentDirectoryPath + '/logs.txt';
-
-    // // write the file
-    // RNFS.writeFile(path, data.payload, 'ascii').catch((err) => {
-    //   console.log(err.message);
-    // });
 
     if (state.returnedDataType === definitions.RETURNED_DATA_TYPES.INTARRAY) {
       if (SerialBuffer.length > 0) {
@@ -139,8 +128,9 @@ export default function SerialDataHandler(
     RNSerialport.setInterface(parseInt(state.interface, 10));
     RNSerialport.setAutoConnect(true);
     RNSerialport.startUsbService();
-    // console.log('started usb service');
+    log.info('started usb service');
   }
+
   async function stopUsbListener() {
     DeviceEventEmitter.removeAllListeners();
     const isOpen = RNSerialport.isOpen();

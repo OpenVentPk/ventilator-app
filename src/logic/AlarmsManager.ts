@@ -1,6 +1,7 @@
 import { showMessage, hideMessage } from 'react-native-flash-message';
 import Sound from 'react-native-sound';
 import Layout from '../constants/Layout';
+import { log } from './AppLogger';
 
 Sound.setCategory('Playback');
 
@@ -30,7 +31,7 @@ function AlarmsManager() {
     } else {
       const shouldPlaySound: boolean =
         !isDecreaseInSameAlarms || highPriorityAlarmsRaised();
-      console.log(shouldPlaySound);
+      log.info(`should play sound: ${shouldPlaySound}`);
       displayAlarmsBanner(shouldPlaySound);
     }
   }
