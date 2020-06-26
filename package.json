@@ -56,6 +56,9 @@
   },
   "jest": {
     "preset": "react-native",
+    "setupFiles": [
+      "./src/__mocks__/nativeModules.js"
+    ],
     "moduleFileExtensions": [
       "ts",
       "tsx",
