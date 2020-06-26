@@ -31,7 +31,6 @@ function AlarmsManager() {
     } else {
       const shouldPlaySound: boolean =
         !isDecreaseInSameAlarms || highPriorityAlarmsRaised();
-      log.info(`should play sound: ${shouldPlaySound}`);
       displayAlarmsBanner(shouldPlaySound);
     }
   }

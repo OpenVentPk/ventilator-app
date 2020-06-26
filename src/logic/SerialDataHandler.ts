@@ -57,6 +57,18 @@ export default function SerialDataHandler(
   function onReadData(data: any) {
     let RemainingData = 0;
 
+        // var RNFS = require('react-native-fs');
+
+    // create a path you want to write to
+    // :warning: on iOS, you cannot write into `RNFS.MainBundlePath`,
+    // but `RNFS.DocumentDirectoryPath` exists on both platforms and is writable
+    // var path = RNFS.DocumentDirectoryPath + '/logs.txt';
+
+    // // write the file
+    // RNFS.writeFile(path, data.payload, 'ascii').catch((err) => {
+    //   console.log(err.message);
+    // });
+
     if (state.returnedDataType === definitions.RETURNED_DATA_TYPES.INTARRAY) {
       if (SerialBuffer.length > 0) {
         if (
