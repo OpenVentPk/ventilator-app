@@ -151,7 +151,7 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
-	release {
+	      release {
             if (project.hasProperty('MYAPP_UPLOAD_STORE_FILE')) {
                 storeFile file(MYAPP_UPLOAD_STORE_FILE)
                 storePassword MYAPP_UPLOAD_STORE_PASSWORD
@@ -191,7 +191,7 @@ android {
                 output.versionCodeOverride =
                         versionCodes.get(abi) * 1048576 + defaultConfig.versionCode
             }
-
+            variant.outputFile = file("$project.buildDir/${defaultConfig.versionName}.apk")
         }
     }
 }
