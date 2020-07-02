@@ -6,7 +6,7 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
-    "test": "jest --forceExit",
+    "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "bundle": "react-native bundle --platform android --dev false --entry-file index.tsx --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res"
   },
@@ -56,9 +56,6 @@
   },
   "jest": {
     "preset": "react-native",
-    "setupFiles": [
-      "./src/__mocks__/nativeModules.js"
-    ],
     "moduleFileExtensions": [
       "ts",
       "tsx",
