@@ -3,7 +3,7 @@ import { logger, configLoggerType } from 'react-native-logs';
 import { rnFsFileAsync } from 'react-native-logs/dist/transports/rnFsFileAsync';
 import { ansiColorConsoleSync } from 'react-native-logs/dist/transports/ansiColorConsoleSync';
 import * as RNFS from 'react-native-fs';
-import { getTimestampedFileName } from '../utils/FileUtils';
+import { getTimestampedFilename } from '../utils/FileUtils';
 import AppConfig from '../constants/AppConfig';
 
 console.log('starting global logger');
@@ -15,7 +15,7 @@ const config: configLoggerType = {
   transport: (msg, level, options) => {
     ansiColorConsoleSync(msg, level, options);
     rnFsFileAsync(msg, level, {
-      loggerName: getTimestampedFileName(),
+      loggerName: getTimestampedFilename(),
       loggerPath: `${logDirectory}`,
     });
   },

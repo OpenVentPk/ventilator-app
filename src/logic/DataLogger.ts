@@ -4,11 +4,11 @@ import SetParameter from '../interfaces/SetParameter';
 import DataConfig from '../constants/DataConfig';
 import { BreathingPhase } from '../enums/BreathingPhase';
 import { log } from './AppLogger';
-import { getTimestampedFileName, createDirectory } from '../utils/FileUtils';
+import { getTimestampedFilename, createDirectory } from '../utils/FileUtils';
 
 // TODO: Add serial data packets also
 export default function dataLogger() {
-  const logFile: string = getTimestampedFileName('', '.csv');
+  const logFile: string = getTimestampedFilename('', '.csv');
   const logDirectoryCreationPromise = createDirectory('sessions');
   let readingsCsv: string[] = [getDataHeaders()];
   const logFrequency: number =

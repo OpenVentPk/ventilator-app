@@ -48,6 +48,6 @@ export function createDirectory(directoryName: string): Promise<string> {
   });
 }
 
-export function getTimestampedFileName(prefix = '', extension = ''): string {
+export function getTimestampedFilename(prefix = '', extension = ''): string {
   return `${prefix}${nowTimeStamp}${extension}`;
 }
