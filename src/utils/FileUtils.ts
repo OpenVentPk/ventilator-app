@@ -34,7 +34,6 @@ function requestExternalStorageAccess(): Promise<boolean> {
     externalStoragePermission,
     requestRationale,
   ).then((result: PermissionStatus) => {
-    console.log(result);
     return result === 'granted';
   });
 }
