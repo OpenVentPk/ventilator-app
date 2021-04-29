@@ -273,8 +273,6 @@ function addGapToGraph(
   }
 }
 
-
-
 function getVentilationMode(valueToParse: number): string {
   // 0x1C is 00011100 so we find the values contain in bits 2-4
   // we also want the index to retrieve the correct mode from our array
